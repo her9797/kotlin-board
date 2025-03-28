@@ -2,6 +2,8 @@ package com.her.kotlinboard.service
 
 import com.her.kotlinboard.entity.Board
 import com.her.kotlinboard.repository.BoardRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -12,7 +14,7 @@ class BoardService(private val boardRepository: BoardRepository) {
     fun createBoard(board: Board): Board = boardRepository.save(board)
 
     // 전체 조회
-    fun getAllBoards(): List<Board> = boardRepository.findAll()
+    fun getAllBoards(pageable: Pageable): Page<Board> = boardRepository.findAll(pageable)
 
     // 단일 조회
     fun getBoardById(id: Long): Optional<Board> = boardRepository.findById(id);
